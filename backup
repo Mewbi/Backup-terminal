@@ -1,0 +1,99 @@
+#!/bin/bash
+
+#---------------Cabeçalho-------------------
+#  Autor: Felipe Fernandes
+#         <felipefernandesgsc@gmail;com>
+#
+#  Programa: backup
+#
+#  Objetivo: Realizar backup de arquivo pa-
+# um e-mail de forma prática utilizando o
+# mutt.
+#-------------------------------------------
+
+#---------------Pré-Requisito---------------
+#Verificar se o mutt está instalado
+ver_mutt=$(which mutt)
+if [ ! -n "$ver_mutt" ]
+   then
+   echo "Mutt não encontrado no sistema..."
+   echo "Instale-o e configure-o primeiramente para a função funcionar."
+   exit 2
+fi
+#-------------------------------------------
+
+#----------------Variáveis------------------
+args=$# #Quantidade de argumentos inseridos
+#-------------------------------------------
+
+#------------------Testes-------------------
+if [ $args = "0" ] #Verifica se foi inserido argumentos
+   then
+   echo "Não foi inserido argumentos."
+cat << END
+
+   Como usar a função:
+ backup <arquivo*> <assunto*> <mensagem> <e-mail*>
+
+   Argumentos com * são obrigatórios.
+   Caso 'assunto' e 'mensagem' tenham espaços insira-os entre aspas.
+
+END
+   exit 2
+fi
+
+if [ "$1" = "?" ] #Imprime como usar a função
+   then
+cat << END
+
+   Como usar a função:
+ backup <arquivo*> <assunto*> <mensagem> <e-mail*>
+
+   Argumentos com * são obrigatórios.
+   Caso algum argumento tenha espaços insira-os entre aspas.
+
+END
+
+   exit 1
+fi
+
+if [ $args -lt "3" ] #Verifica se foi inserido argumentos insuficientes
+   then
+   echo -e "Argumentos insuficientes...\nPara saber como usar digite 'backup ?'"
+   exit 2
+fi
+
+if [ $args -gt "4" ] #Verifica se foi inserido argumentos excedentes
+   then
+   echo -e "Argumentos excedentes...\nPara saber como usar digite 'backup ?'"
+   exit 2
+fi
+
+
+if [ -e "$1" ] #Verifica o argumento 1 é um arquivo
+   then
+      if [ -d "$1" ] #Verifica se o argumento 1 não é um diretório
+        then
+        echo "O primeiro argumento \"$1\" é um diretório."
+	exit 2
+      fi
+   else
+   echo "O primeiro argumento \"$1\" não é um arquivo válido."
+   exit 2
+fi
+#-------------------------------------------
+
+#-------------------Início------------------
+case $args in
+3)
+echo "" | mutt -s "$2" -a $1 -- $3 \
+&& echo "backup realizado com sucesso" \
+|| echo "falha ao realizar backup" ;;
+
+4)
+echo "$3" | mutt -s "$2" -a $1 -- $4 \
+&& echo "backup realizado com sucesso" \
+|| echo "falha ao realizar backup" ;;
+esac
+#-------------------------------------------
+
