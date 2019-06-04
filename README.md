@@ -10,7 +10,8 @@ Realiza o backup de um arquivo para um e-mail via terminal.
 
 # Observações
  Só é possível fazer o envio de um arquivo por vez, e, um e-mail de cada vez.
- Recomanda-se enviar a função para /usr/bin/backup , pois assim é possível chama-la de qualquer lugar do terminal.
+ 
+ Recomenda-se enviar a função para /usr/bin/backup , pois assim é possível chama-la de qualquer lugar do terminal.
  
 # Dúvidas ou Sugestões
  Entrar em contato <felipefernandesgsc@gmail.com>
