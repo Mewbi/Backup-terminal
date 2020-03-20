@@ -13,5 +13,8 @@ Realiza o backup de um arquivo para um e-mail via terminal.
  
  Recomenda-se enviar a função para /usr/bin/backup , pois assim é possível chama-la de qualquer lugar do terminal.
  
+# Vídeo Tutorial
+O seguinte vídeo ensina o passo a passo de como fazer este jogo: https://youtu.be/CYHUYrsXZ6M
+ 
 # Dúvidas ou Sugestões
  Entrar em contato <felipefernandesgsc@gmail.com>
